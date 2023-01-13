@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "DTCharacter.generated.h"
 
+class ADTBomb;
 UCLASS()
 class DTTASK_API ADTCharacter : public ACharacter
 {
@@ -17,6 +18,7 @@ protected:
 	
 private:
 
+	// Movement
 	UFUNCTION()
 	void OnMoveForward(float InAxisValue);
 
@@ -28,7 +30,14 @@ private:
 
 	UFUNCTION()
 	void OnMoveRight(float InAxisValue);
+	// *******
+
+	UFUNCTION()
+	void OnPlaceBomb();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Movement")
 	float fSpeed = 10.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Bomb")
+	TSubclassOf<ADTBomb> BombClass;
 };
