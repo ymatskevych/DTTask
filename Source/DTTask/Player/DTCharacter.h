@@ -35,9 +35,19 @@ private:
 	UFUNCTION()
 	void OnPlaceBomb();
 
+	UFUNCTION()
+	void OnBombDelay();
+
+	UPROPERTY(EditDefaultsOnly)
+	float BombDetonationTime = 3.f;
+	
 	UPROPERTY(EditDefaultsOnly, Category = "Movement")
 	float fSpeed = 10.f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Bomb")
 	TSubclassOf<ADTBomb> BombClass;
+
+	FTimerHandle BombPlaceTimerHandle;
+	bool bCanPlaceBomb = true;
+	float DetonationRate = 1.f;
 };

@@ -39,7 +39,10 @@ void ADTCharacter::OnMoveRight(float InAxisValue)
 
 void ADTCharacter::OnPlaceBomb()
 {
-	// TODO: check if placed
+	if (!bCanPlaceBomb)
+	{
+		return;
+	}
 	if (!ensureMsgf(IsValid(BombClass), TEXT("[ADTCharacter]: BombClass is not assigned")))
 	{
 		return;
@@ -48,7 +51,19 @@ void ADTCharacter::OnPlaceBomb()
 	FActorSpawnParameters ActorSpawnParameters;
 	ActorSpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-	GetWorld()->SpawnActor<ADTBomb>(BombClass, GetActorLocation(), FRotator::ZeroRotator, ActorSpawnParameters);
+	ADTBomb* Bomb = GetWorld()->SpawnActor<ADTBomb>(BombClass, GetActorLocation(),
+		FRotator::ZeroRotator, ActorSpawnParameters);
+	Bomb->SetUp(BombDetonationTime);
+
+	GetWorldTimerManager().SetTimer(BombPlaceTimerHandle, this, &ADTCharacter::OnBombDelay, DetonationRate,
+		false, BombDetonationTime);
+	bCanPlaceBomb = false;
+}
+
+void ADTCharacter::OnBombDelay()
+{
+	GetWorldTimerManager().ClearTimer(BombPlaceTimerHandle);
+	bCanPlaceBomb = true;
 }
 
 

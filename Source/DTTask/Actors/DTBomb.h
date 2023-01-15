@@ -10,6 +10,10 @@ class DTTASK_API ADTBomb : public AActor
 {
 	GENERATED_BODY()
 
+public:
+
+	void SetUp(float DetonationTime = 3.f);
+	
 protected:
 
 	virtual void BeginPlay() override;
@@ -27,9 +31,6 @@ private:
 	TArray<TSubclassOf<AActor>> DamagableActorClasses;
 	
 	FTimerHandle DetonateTimerHandle;
-
-	UPROPERTY(EditDefaultsOnly)
-	float DetonationTime = 3.f;
 
 	float GridCellSize = 64.f;
 	float TraceLenght = 32.f;

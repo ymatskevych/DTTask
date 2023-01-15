@@ -5,14 +5,17 @@
 
 #include "Kismet/KismetSystemLibrary.h"
 
+void ADTBomb::SetUp(float DetonationTime)
+{
+	GetWorldTimerManager().SetTimer(DetonateTimerHandle, this, &ADTBomb::Detonate, DetonationRate, false,
+		DetonationTime);
+}
+
 void ADTBomb::BeginPlay()
 {
 	Super::BeginPlay();
 
 	CorrectStartLocation();
-
-	GetWorldTimerManager().SetTimer(DetonateTimerHandle, this, &ADTBomb::Detonate, DetonationRate, false,
-		DetonationTime);
 }
 
 void ADTBomb::CorrectStartLocation()
