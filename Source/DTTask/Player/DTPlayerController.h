@@ -21,4 +21,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UDTMainWidget> MainWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly)
+	int32 LevelTimeInSeconds = 220;
 };
