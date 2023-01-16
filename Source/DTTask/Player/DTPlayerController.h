@@ -6,6 +6,8 @@
 #include "UObject/Object.h"
 #include "DTPlayerController.generated.h"
 
+class UDTMainWidget;
+
 UCLASS()
 class DTTASK_API ADTPlayerController : public APlayerController
 {
@@ -14,4 +16,9 @@ class DTTASK_API ADTPlayerController : public APlayerController
 protected:
 	
 	virtual void BeginPlay() override;
+
+private:
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UDTMainWidget> MainWidgetClass;
 };
