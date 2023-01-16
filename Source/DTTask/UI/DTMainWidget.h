@@ -17,6 +17,11 @@ class DTTASK_API UDTMainWidget : public UUserWidget
 public:
 
 	void SetTimeLeft(int32 InSecondsLeft);
+	void UpdateScore(int32 InScoreValue);
+
+protected:
+
+	virtual void NativeConstruct() override;
 	
 private:
 

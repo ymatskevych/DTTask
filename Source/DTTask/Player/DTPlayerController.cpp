@@ -13,7 +13,15 @@ void ADTPlayerController::BeginPlay()
 	{
 		return;
 	}
-	UDTMainWidget* MainWidget = CreateWidget<UDTMainWidget>(this, MainWidgetClass);
+	MainWidget = CreateWidget<UDTMainWidget>(this, MainWidgetClass);
 	MainWidget->SetTimeLeft(LevelTimeInSeconds);
 	MainWidget->AddToViewport();
+
+	UpdateScore.AddDynamic(this, &ADTPlayerController::OnUpdateScore);
+}
+
+void ADTPlayerController::OnUpdateScore(int32 InScoreValue)
+{
+	TotalScore += InScoreValue;
+	MainWidget->UpdateScore(TotalScore);
 }

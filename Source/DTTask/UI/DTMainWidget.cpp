@@ -19,6 +19,18 @@ void UDTMainWidget::SetTimeLeft(int32 InSecondsLeft)
 	SecondsLeft = InSecondsLeft;
 }
 
+void UDTMainWidget::UpdateScore(int32 InScoreValue)
+{
+	ScoreText->SetText(FText::FromString(FString::Printf(TEXT("SCORE: %d"), InScoreValue)));
+}
+
+void UDTMainWidget::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	UpdateScore(0);
+}
+
 void UDTMainWidget::OnSecondGone()
 {
 	if (SecondsLeft <= 0)

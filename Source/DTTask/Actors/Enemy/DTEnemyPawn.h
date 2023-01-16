@@ -36,6 +36,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Overridables")
 	EEnemyDirection Direction = EEnemyDirection::None;
+
+	UPROPERTY(EditAnywhere, Category = "Overridables")
+	int32 ScoreValue = 300;
 	
 	FVector Destination = FVector(1.f, 0.f, 0.f);
 

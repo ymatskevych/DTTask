@@ -14,4 +14,9 @@ class DTTASK_API ADTBricks : public AActor, public IDTDamagable
 public:
 
 	virtual void DealDamage() override;
+
+private:
+
+	UPROPERTY(EditDefaultsOnly)
+	int32 ScoreValue = 100;
 };
