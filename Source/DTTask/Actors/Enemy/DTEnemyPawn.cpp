@@ -10,6 +10,11 @@ void ADTEnemyPawn::Tick(float DeltaSeconds)
 	AddMovementInput(Destination);
 }
 
+void ADTEnemyPawn::DealDamage()
+{
+	Destroy();
+}
+
 void ADTEnemyPawn::BeginPlay()
 {
 	Super::BeginPlay();

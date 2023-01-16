@@ -3,6 +3,7 @@
 
 #include "DTBomb.h"
 
+#include "DTTask/Interfaces/DTDamagable.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 void ADTBomb::SetUp(float DetonationTime)
@@ -49,15 +50,13 @@ void ADTBomb::MakeDamage()
 		false, ActorsToIgnore, EDrawDebugTrace::ForOneFrame, OutHits, true,
 		FLinearColor::Red, FLinearColor::Green, 1.f);
 
-	for (const TSubclassOf<AActor>& DamagableActorClass : DamagableActorClasses)
+	for (const FHitResult HitResult : OutHits)
 	{
-		for (const FHitResult HitResult : OutHits)
+		AActor* HitActor = HitResult.GetActor();
+		IDTDamagable* Damagable = Cast<IDTDamagable>(HitActor);
+		if (Damagable)
 		{
-			AActor* HitActor = HitResult.GetActor();
-			if (HitActor && HitActor->GetClass() == DamagableActorClass)
-			{
-				HitActor->Destroy(); // TODO: add interface IDamagable
-			}
-		}	
+			Damagable->DealDamage();
+		}
 	}
 }

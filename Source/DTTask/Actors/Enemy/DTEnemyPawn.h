@@ -4,16 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "DTEnemyData.h"
+#include "DTTask/Interfaces/DTDamagable.h"
 #include "DTEnemyPawn.generated.h"
 
 UCLASS()
-class DTTASK_API ADTEnemyPawn : public APawn
+class DTTASK_API ADTEnemyPawn : public APawn, public IDTDamagable
 {
 	GENERATED_BODY()
 
 public:
 
 	virtual void Tick(float DeltaSeconds) override;
+	virtual void DealDamage() override;
 	
 protected:
 
